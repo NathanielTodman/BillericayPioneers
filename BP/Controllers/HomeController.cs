@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using BP.Models;
 using BP.Data;
@@ -19,7 +15,7 @@ namespace BP.Controllers
         }
         public IActionResult Index()
         {
-            return View();
+            return RedirectToAction(nameof(PerformancesController.GetPlayerRankings), "Performances");
         }
 
         public IActionResult About()

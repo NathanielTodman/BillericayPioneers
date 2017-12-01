@@ -1,0 +1,72 @@
+﻿@model IEnumerable<BP.Models.PlayerRankings>
+@{
+    ViewData["Title"] = "Player Rankings";
+}
+<h2>Player Rankings</h2>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Points)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AveragePerGame)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.StrongestPosition)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Goals)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Assists)
+            </th>
+            <th style="color:yellow">
+                @Html.DisplayNameFor(model => model.YellowCards)
+            </th>
+            <th style="color:red">
+                @Html.DisplayNameFor(model => model.RedCards)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.GamesPlayed)
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Points)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.AveragePerGame)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.StrongestPosition)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Goals)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Assists)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.YellowCards)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.RedCards)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.GamesPlayed)
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

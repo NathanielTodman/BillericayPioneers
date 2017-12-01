@@ -1,4 +1,6 @@
-﻿namespace BP.Data
+﻿using System.Collections.Generic;
+
+namespace BP.Data
 {
     public class Player
     {
@@ -15,5 +17,7 @@
                 return FirstName + " " + LastName;
             }
         }
+
+        public virtual ICollection<Performance> Performances { get; set; }
     }
 }

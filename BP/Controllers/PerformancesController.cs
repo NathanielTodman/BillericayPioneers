@@ -1,11 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using BP.Data;
+using BP.Models;
 
 namespace BP.Controllers
 {
@@ -21,11 +20,11 @@ namespace BP.Controllers
         // GET: Performances
         public async Task<IActionResult> Index(int matchID)
         {
-            var bPContext = _context.Performances.Where(m => m.MatchID == matchID)
+            var performances = _context.Performances.Where(m => m.MatchID == matchID)
                 .Include(p => p.Match).Include(p => p.Player)
                 .OrderByDescending(g=>g.TotalPoints);
             ViewData["MatchID"] = matchID;
-            return View(await bPContext.ToListAsync());
+            return View(await performances.ToListAsync());
         }
 
         // GET: Performances/Details/5
@@ -169,5 +168,13 @@ namespace BP.Controllers
         {
             return _context.Performances.Any(e => e.ID == id);
         }
+
+        public async Task<IActionResult> GetPlayerRankings(int matchID)
+        {
+            await ScoreCalculator.ReCalculateAllTotalsAsync(_context);
+            var players = await PlayerRankings.GetAllPlayerRankings(_context);
+            return View(players);
+        }
+
     }
 }

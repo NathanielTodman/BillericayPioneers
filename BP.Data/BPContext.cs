@@ -1,9 +1,13 @@
 ﻿using Microsoft.EntityFrameworkCore;
-
 namespace BP.Data
 {
     public class BPContext : DbContext
     {
+        public BPContext()
+        {
+           
+        }
+
         public BPContext(DbContextOptions<BPContext> options) : base (options)
         {
 
