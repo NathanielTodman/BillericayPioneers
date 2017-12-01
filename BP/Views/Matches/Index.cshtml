@@ -1,0 +1,55 @@
+﻿@model IEnumerable<BP.Data.Match>
+@{
+    ViewData["Title"] = "Index";
+}
+<h2>Fixtures</h2>
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Date)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MatchName)
+            </th>
+            <th>
+                Result
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Competition)
+            </th>
+            <th></th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @item.Date.ToShortDateString()
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.MatchName)
+                </td>
+                <td>
+                    @item.HomeScore - @item.AwayScore
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Competition)
+                </td>
+                <td>
+                    <a asp-controller="Performances" asp-action="Index" asp-route-matchId="@item.ID">Performances</a> 
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.ID">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@item.ID">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@item.ID">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

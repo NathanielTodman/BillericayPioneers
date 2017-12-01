@@ -1,0 +1,90 @@
+﻿@model BP.Data.Scoring
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Scoring</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Appearance)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Appearance)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.GoalScored)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.GoalScored)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.CleanSheet)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.CleanSheet)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Assist)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Assist)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.ConceedOnePlus)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.ConceedOnePlus)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.ConceedThreePlus)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.ConceedThreePlus)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.ConceedFivePlus)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.ConceedFivePlus)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.PenSave)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.PenSave)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.PenMiss)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.PenMiss)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.MOTM)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.MOTM)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.YellowCard)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.YellowCard)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.RedCard)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.RedCard)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.Position">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>

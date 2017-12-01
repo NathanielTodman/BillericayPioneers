@@ -1,0 +1,99 @@
+﻿@model BP.Data.Performance
+
+@{
+    ViewData["Title"] = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>Performance</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Position)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Position)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Appearance)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Appearance)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Goals)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Goals)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.CleanSheet)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.CleanSheet)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Assists)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Assists)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.GoalsConceeded)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.GoalsConceeded)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.PenaltiesSaved)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.PenaltiesSaved)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.PenaltiesMissed)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.PenaltiesMissed)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.MOTM)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.MOTM)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.YellowCard)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.YellowCard)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.RedCard)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.RedCard)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Match)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Match.ID)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Player)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Player.ID)
+        </dd>
+    </dl>
+    
+    <form asp-action="Delete">
+        <input type="hidden" asp-for="ID" />
+        <input type="submit" value="Delete" class="btn btn-default" /> |
+        <a asp-action="Index">Back to List</a>
+    </form>
+</div>

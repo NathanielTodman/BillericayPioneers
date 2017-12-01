@@ -1,0 +1,91 @@
+﻿@model BP.Data.Performance
+@using BP.Data
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h2>Edit</h2>
+
+<h4>Performance</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="ID" />
+            <div class="form-group">
+                <label asp-for="PlayerID" class="control-label">Player</label>
+                <select asp-for="PlayerID" class="form-control" asp-items="ViewBag.PlayerID"></select>
+            </div>
+            <div class="form-group">
+                <input asp-for="MatchID" type="hidden" value="@Model.MatchID" />
+            </div>
+            <div class="form-group">
+                <label asp-for="Position" class="control-label"></label>
+                <select asp-for="Position" class="form-control" asp-items="Html.GetEnumSelectList<Position>()"></select>
+                <span asp-validation-for="Position" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <div class="checkbox">
+                    <label>
+                        <input asp-for="Appearance" checked="checked" /> @Html.DisplayNameFor(model => model.Appearance)
+                    </label>
+                </div>
+            </div>
+            <div class="form-group">
+                <label asp-for="Goals" class="control-label"></label>
+                <input asp-for="Goals" class="form-control" />
+                <span asp-validation-for="Goals" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Assists" class="control-label"></label>
+                <input asp-for="Assists" class="form-control" />
+                <span asp-validation-for="Assists" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="PenaltiesSaved" class="control-label"></label>
+                <input asp-for="PenaltiesSaved" class="form-control" />
+                <span asp-validation-for="PenaltiesSaved" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="PenaltiesMissed" class="control-label"></label>
+                <input asp-for="PenaltiesMissed" class="form-control" />
+                <span asp-validation-for="PenaltiesMissed" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <div class="checkbox">
+                    <label>
+                        <input asp-for="MOTM" /> @Html.DisplayNameFor(model => model.MOTM)
+                    </label>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="checkbox">
+                    <label>
+                        <input asp-for="YellowCard" /> @Html.DisplayNameFor(model => model.YellowCard)
+                    </label>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="checkbox">
+                    <label>
+                        <input asp-for="RedCard" /> @Html.DisplayNameFor(model => model.RedCard)
+                    </label>
+                </div>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-default" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

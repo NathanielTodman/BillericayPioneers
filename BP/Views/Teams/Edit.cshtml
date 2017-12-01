@@ -1,0 +1,69 @@
+﻿@model BP.Data.Team
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h2>Edit</h2>
+
+<h4>Team</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="ID" />
+            <div class="form-group">
+                <label asp-for="TeamName" class="control-label"></label>
+                <input asp-for="TeamName" class="form-control" />
+                <span asp-validation-for="TeamName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Points" class="control-label"></label>
+                <input asp-for="Points" class="form-control" />
+                <span asp-validation-for="Points" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Wins" class="control-label"></label>
+                <input asp-for="Wins" class="form-control" />
+                <span asp-validation-for="Wins" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Draws" class="control-label"></label>
+                <input asp-for="Draws" class="form-control" />
+                <span asp-validation-for="Draws" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Losses" class="control-label"></label>
+                <input asp-for="Losses" class="form-control" />
+                <span asp-validation-for="Losses" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="GoalsFor" class="control-label"></label>
+                <input asp-for="GoalsFor" class="form-control" />
+                <span asp-validation-for="GoalsFor" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="GoalsAgainst" class="control-label"></label>
+                <input asp-for="GoalsAgainst" class="form-control" />
+                <span asp-validation-for="GoalsAgainst" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="GoalDifference" class="control-label"></label>
+                <input asp-for="GoalDifference" class="form-control" />
+                <span asp-validation-for="GoalDifference" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-default" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
