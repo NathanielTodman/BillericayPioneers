@@ -10,9 +10,6 @@ namespace BP.Data
         public int GoalScored { get; set; }
         public int CleanSheet { get; set; }
         public int Assist { get; set; }
-        public int ConceedOnePlus { get; set; }
-        public int ConceedThreePlus { get; set; }
-        public int ConceedFivePlus { get; set; }
         public int PenSave { get; set; }
         public int PenMiss { get; set; }
         public int MOTM { get; set; }

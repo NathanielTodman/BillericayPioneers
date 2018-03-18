@@ -2,8 +2,10 @@
 @{
     ViewData["Title"] = "Player Rankings";
 }
+<script src="~/js/sorttable.js"></script>
+
 <h2>Player Rankings</h2>
-<table class="table">
+<table id="rankings" class="table">
     <thead>
         <tr>
             <th>
@@ -14,6 +16,9 @@
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.AveragePerGame)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.GamesPlayed)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.StrongestPosition)
@@ -29,9 +34,6 @@
             </th>
             <th style="color:red">
                 @Html.DisplayNameFor(model => model.RedCards)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.GamesPlayed)
             </th>
         </tr>
     </thead>
@@ -49,6 +51,9 @@
                     @Html.DisplayFor(modelItem => item.AveragePerGame)
                 </td>
                 <td>
+                    @Html.DisplayFor(modelItem => item.GamesPlayed)
+                </td>
+                <td>
                     @Html.DisplayFor(modelItem => item.StrongestPosition)
                 </td>
                 <td>
@@ -63,10 +68,8 @@
                 <td>
                     @Html.DisplayFor(modelItem => item.RedCards)
                 </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.GamesPlayed)
-                </td>
             </tr>
         }
     </tbody>
 </table>
+

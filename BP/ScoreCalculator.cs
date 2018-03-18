@@ -1,6 +1,7 @@
 ﻿using System.Linq;
 using BP.Data;
 using Microsoft.EntityFrameworkCore;
+using System;
 
 namespace BP
 {
@@ -38,12 +39,21 @@ namespace BP
             total += p.Assists * scoring.Assist;
             total += p.CleanSheet ? scoring.CleanSheet : 0;
             total += p.Goals * scoring.GoalScored;
-            if (p.GoalsConceeded > 5)
-                total += scoring.ConceedFivePlus;
-            if (p.GoalsConceeded > 3)
-                total += scoring.ConceedThreePlus;
-            if (p.GoalsConceeded > 1)
-                total += scoring.ConceedOnePlus;
+            if(p.GoalsConceeded > 1 && (p.Position == Position.Defence || p.Position == Position.GoalKeeper))
+            {
+                total += Convert.ToInt32(Math.Floor(p.GoalsConceeded * -0.5));                
+            }
+            if (p.GoalsConceeded > 2 && p.Position == Position.Midfield)
+            {
+                if (p.GoalsConceeded > 6)
+                    total -= 3;
+                else if (p.GoalsConceeded > 4)
+                    total -= 2;
+                else if (p.GoalsConceeded > 2)
+                    total -= 1;
+
+            }
+
 
             total += p.MOTM ? scoring.MOTM : 0;
             total += p.PenaltiesMissed * scoring.PenMiss;

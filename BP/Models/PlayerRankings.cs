@@ -1,5 +1,6 @@
 ﻿using BP.Data;
 using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -13,7 +14,7 @@ namespace BP.Models
         public string Name { get; set; }
         [Display]
         public double? Points { get; set; }
-        [Display(Name= "Average Per Game")]
+        [Display(Name= "Economy")]
         public double? AveragePerGame { get; set; }
         [Display(Name= "Strongest Position")]
         public string StrongestPosition { get; set; }
@@ -50,12 +51,12 @@ namespace BP.Models
                 {
                     Name = player.FullName,
                     Points = player.Performances?.Sum(g => g.TotalPoints),
-                    AveragePerGame = player.Performances?.Average(g => g.TotalPoints),
+                    AveragePerGame = Math.Round((double)player.Performances?.Average(g => g.TotalPoints),1, MidpointRounding.AwayFromZero),
                     StrongestPosition = player.Performances?.OrderByDescending(g => g.TotalPoints).First().Position.ToString(),
                     Goals = player.Performances?.Sum(g => g.Goals),
                     Assists = player.Performances?.Sum(g => g.Assists),
-                    YellowCards = player.Performances?.Sum(g => g.Assists),
-                    RedCards = player.Performances?.Sum(g => g.Assists),
+                    YellowCards = player.Performances?.Where(g => g.YellowCard == true).Count(),
+                    RedCards = player.Performances?.Where(g => g.RedCard == true).Count(),
                     GamesPlayed = player.Performances?.Count,
                     LastFivePerformances = player.Performances?.TakeLast(5).ToArray()
                 };

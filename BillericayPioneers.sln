@@ -7,7 +7,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BP.Data", "BP.Data\BP.Data.
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BP", "BP\BP.csproj", "{0591714F-C1FD-4615-BB22-5E7B2321FBDD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BPUnitTests", "BPUnitTests\BPUnitTests.csproj", "{C2C49684-163E-4E6D-8A24-5B0D54A42CEE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BPUnitTests", "BPUnitTests\BPUnitTests.csproj", "{C2C49684-163E-4E6D-8A24-5B0D54A42CEE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

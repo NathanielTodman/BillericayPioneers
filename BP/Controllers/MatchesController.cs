@@ -6,9 +6,11 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using BP.Data;
+using Microsoft.AspNetCore.Authorization;
 
 namespace BP.Controllers
 {
+    [Authorize(Roles = "Manager")]
     public class MatchesController : Controller
     {
         private readonly BPContext _context;
@@ -19,6 +21,7 @@ namespace BP.Controllers
         }
 
         // GET: Matches
+        [AllowAnonymous]
         public async Task<IActionResult> Index()
         {
             var bPContext = _context.Matches.Include(m => m.Oposition);

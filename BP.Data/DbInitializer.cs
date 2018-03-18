@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,6 +12,7 @@ namespace BP.Data
         public static void Initialize(BPContext context)
         {
             context.Database.EnsureCreated();
+            //context.Database.Migrate();
 
             // Look for any students.
             if (context.Players.Any())
@@ -52,9 +54,6 @@ namespace BP.Data
                     GoalScored = 6,
                     CleanSheet =4,
                     Assist = 2,
-                    ConceedOnePlus = -1,
-                    ConceedThreePlus = -1,
-                    ConceedFivePlus = -1,
                     PenSave = 6,
                     PenMiss = -1,
                     MOTM = 4,
@@ -66,9 +65,6 @@ namespace BP.Data
                     GoalScored = 5,
                     CleanSheet =4,
                     Assist = 2,
-                    ConceedOnePlus = -1,
-                    ConceedThreePlus = -1,
-                    ConceedFivePlus = -1,
                     PenSave = 6,
                     PenMiss = -1,
                     MOTM = 4,
@@ -80,9 +76,6 @@ namespace BP.Data
                     GoalScored = 4,
                     CleanSheet =1,
                     Assist = 2,
-                    ConceedOnePlus = -0,
-                    ConceedThreePlus = -1,
-                    ConceedFivePlus = -1,
                     PenSave = 6,
                     PenMiss = -2,
                     MOTM = 4,
@@ -94,9 +87,6 @@ namespace BP.Data
                     GoalScored = 3,
                     CleanSheet =0,
                     Assist = 2,
-                    ConceedOnePlus = 0,
-                    ConceedThreePlus = 0,
-                    ConceedFivePlus = 0,
                     PenSave = 6,
                     PenMiss = -3,
                     MOTM = 4,

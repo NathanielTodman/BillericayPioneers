@@ -4,7 +4,7 @@
     ViewData["Title"] = "Index";
 }
 
-<h2>Index</h2>
+<h2>@ViewData["MatchName"]</h2>
 
 <p>
     <a asp-action="Create" asp-route-matchId="@ViewData["MatchID"]">Create New</a>
@@ -15,27 +15,54 @@
             <th>
                 @Html.DisplayNameFor(model => model.Player)
             </th>
-
+            <th>
+                @Html.DisplayNameFor(model => model.Position)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Goals)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Assists)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CleanSheet)
+            </th>
             <th>Points</th>
 
             <th></th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Player.FullName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.TotalPoints)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.ID">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.ID">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.ID">Delete</a>
-            </td>
-        </tr>
-}
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Player.FullName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Position)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Goals)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Assists)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CleanSheet)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TotalPoints)
+                </td>
+                <td>
+                    <form asp-controller="Performances" asp-action="Delete" method="post">
+
+                        <a class="btn btn-success" asp-action="Edit" asp-route-id="@item.ID">Edit</a>
+                        <input type="hidden" name="id" value="@item.ID" />
+                        <button class="btn btn-danger" type="submit">Delete</button>
+                    </form>
+                </td>
+            </tr>
+        }
     </tbody>
 </table>

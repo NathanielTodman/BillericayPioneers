@@ -43,6 +43,6 @@ namespace BP.Data
         }
 
     }
-    public enum Competition { League, Cup }
+    public enum Competition { League, Cup, Friendly }
 
 }

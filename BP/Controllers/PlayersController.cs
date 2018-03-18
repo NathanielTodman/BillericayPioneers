@@ -1,14 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using BP.Data;
+using Microsoft.AspNetCore.Authorization;
 
 namespace BP.Controllers
 {
+    [Authorize(Roles = "Manager")]
     public class PlayersController : Controller
     {
         private readonly BPContext _context;
@@ -19,6 +18,7 @@ namespace BP.Controllers
         }
 
         // GET: Players
+        [AllowAnonymous]
         public async Task<IActionResult> Index()
         {
             return View(await _context.Players.ToListAsync());
@@ -53,7 +53,7 @@ namespace BP.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ID,FirstName,LastName,NickName,Number")] Player player)
+        public async Task<IActionResult> Create([Bind("ID,FirstName,LastName,NickName,Number,DefaultPosition")] Player player)
         {
             if (ModelState.IsValid)
             {
@@ -85,7 +85,7 @@ namespace BP.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("ID,FirstName,LastName,NickName,Number")] Player player)
+        public async Task<IActionResult> Edit(int id, [Bind("ID,FirstName,LastName,NickName,Number,DefaultPosition")] Player player)
         {
             if (id != player.ID)
             {

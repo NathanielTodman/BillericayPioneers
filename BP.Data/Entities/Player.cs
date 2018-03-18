@@ -9,6 +9,7 @@ namespace BP.Data
         public string LastName { get; set; } = "";
         public string NickName { get; set; }
         public int Number { get; set; }
+        public Position DefaultPosition { get; set; }
 
         public string FullName
         {

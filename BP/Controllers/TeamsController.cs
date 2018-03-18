@@ -1,14 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using BP.Data;
+using Microsoft.AspNetCore.Authorization;
 
 namespace BP.Controllers
 {
+    [Authorize(Roles = "Manager")]
     public class TeamsController : Controller
     {
         private readonly BPContext _context;
@@ -18,7 +17,8 @@ namespace BP.Controllers
             _context = context;
         }
 
-        // GET: Teams
+        // GET: Teams       
+        [AllowAnonymous]
         public async Task<IActionResult> Index()
         {
             return View(await _context.Teams.ToListAsync());
@@ -53,7 +53,7 @@ namespace BP.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ID,TeamName,Points,Wins,Draws,Losses,GoalsFor,GoalsAgainst,GoalDifference")] Team team)
+        public async Task<IActionResult> Create(Team team)
         {
             if (ModelState.IsValid)
             {

@@ -25,6 +25,7 @@ namespace BP
                 {
                     var context = services.GetRequiredService<BPContext>();
                     DbInitializer.Initialize(context);
+
                 }
                 catch (Exception ex)
                 {

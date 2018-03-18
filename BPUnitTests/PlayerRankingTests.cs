@@ -16,11 +16,13 @@ namespace BPUnitTests
                 .Options;
             using (var context = new BPContext(options))
             {
-                var players = context.Players.Include(g=>g.Performances)
+                var players = context.Players.Include(g => g.Performances)
                     .ToArray();
 
 
+
+            }
+
         }
     }
-}
 }

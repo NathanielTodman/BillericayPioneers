@@ -5,9 +5,12 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using BP.Data;
 using BP.Models;
+using System.Collections.Generic;
+using Microsoft.AspNetCore.Authorization;
 
 namespace BP.Controllers
 {
+    [Authorize(Roles = "Manager")]
     public class PerformancesController : Controller
     {
         private readonly BPContext _context;
@@ -18,13 +21,24 @@ namespace BP.Controllers
         }
 
         // GET: Performances
+        [AllowAnonymous]
         public async Task<IActionResult> Index(int matchID)
         {
-            var performances = _context.Performances.Where(m => m.MatchID == matchID)
-                .Include(p => p.Match).Include(p => p.Player)
-                .OrderByDescending(g=>g.TotalPoints);
+            Performance[] performances = null;
+            if (_context.Performances.Any(g => g.MatchID == matchID) || matchID == 0)
+            {
+                performances = await _context.Performances.Where(m => m.MatchID == matchID)
+                    .Include(p => p.Match).Include(p => p.Player)
+                    .OrderByDescending(g => g.TotalPoints).ToArrayAsync();
+            }
+            else
+            {
+                performances = GetDefaultPerformances(matchID).ToArray();
+            }
             ViewData["MatchID"] = matchID;
-            return View(await performances.ToListAsync());
+            ViewData["MatchName"] = _context.Matches.AsNoTracking().Include(g => g.Oposition)
+                .FirstOrDefault(g => g.ID == matchID)?.MatchName;
+            return View(performances);
         }
 
         // GET: Performances/Details/5
@@ -63,7 +77,7 @@ namespace BP.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ID,PlayerID,MatchID,Position,Appearance,Goals,CleanSheet,Assists,GoalsConceeded,PenaltiesSaved,PenaltiesMissed,MOTM,YellowCard,RedCard")] Performance performance)
+        public async Task<IActionResult> Create(Performance performance)
         {
             if (ModelState.IsValid)
             {
@@ -154,14 +168,15 @@ namespace BP.Controllers
         }
 
         // POST: Performances/Delete/5
-        [HttpPost, ActionName("Delete")]
+        [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
+        public async Task<IActionResult> Delete(int id)
         {
             var performance = await _context.Performances.SingleOrDefaultAsync(m => m.ID == id);
+            var matchId = performance?.MatchID;
             _context.Performances.Remove(performance);
             await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
+            return RedirectToAction(nameof(Index), new { matchID = matchId });
         }
 
         private bool PerformanceExists(int id)
@@ -169,11 +184,53 @@ namespace BP.Controllers
             return _context.Performances.Any(e => e.ID == id);
         }
 
+        [AllowAnonymous]
         public async Task<IActionResult> GetPlayerRankings(int matchID)
         {
             await ScoreCalculator.ReCalculateAllTotalsAsync(_context);
             var players = await PlayerRankings.GetAllPlayerRankings(_context);
             return View(players);
+        }
+
+        public IEnumerable<Performance> GetDefaultPerformances(int matchID)
+        {
+            List<Performance> performances = null;
+            var match = _context.Matches.FirstOrDefault(g => g.ID == matchID);
+            if (match != null)
+            {
+                performances = new List<Performance>();
+                var players = _context.Players.ToArray();
+                foreach (var player in players)
+                {
+                    var performance = new Performance()
+                    {
+                        Appearance = true,
+                        Assists = 0,
+                        CleanSheet = match.GoalsConceeded < 1,
+                        GoalsConceeded = match.GoalsConceeded,
+                        Goals = 0,
+                        Match = match,
+                        MatchID = match.ID,
+                        MOTM = false,
+                        PenaltiesMissed = 0,
+                        PenaltiesSaved = 0,
+                        Player = player,
+                        PlayerID = player.ID,
+                        Position = player.DefaultPosition,
+                        RedCard = false,
+                        YellowCard = false,
+                        TotalPoints = 0
+                    };
+
+                    performances.Add(performance);
+                }
+                if (performances != null && performances.Count > 0)
+                {
+                    _context.Performances.AddRangeAsync(performances);
+                    _context.SaveChangesAsync();
+                }
+            }
+            return performances;
         }
 
     }
