@@ -17,8 +17,9 @@ namespace BP.Controllers
 
         [AllowAnonymous]
         [HttpGet]
-        public IActionResult Login()
+        public IActionResult Login(string returnUrl)
         {
+            ViewBag.ReturnUrl = returnUrl;
             return View();
 
         }
@@ -41,12 +42,12 @@ namespace BP.Controllers
                 return View();
             }
             var user = new User("", "", model.Username, model.Password);
-            using (var context =  new BPContext())
+            using (var context = new BPContext())
             {
                 if (UserAuthentication.IsValidUser(user, context))
                 {
                     var temp = UserAuthentication.GetUser(user.Username, user.Password, context);
-                       var claims = new List<Claim>
+                    var claims = new List<Claim>
             {
                 new Claim(ClaimTypes.Name, temp.FirstName),
                 new Claim("FullName", temp.ToString()),
@@ -85,13 +86,14 @@ namespace BP.Controllers
                         CookieAuthenticationDefaults.AuthenticationScheme,
                         new ClaimsPrincipal(claimsIdentity),
                         authProperties);
-
+                    if (model.ReturnURL != null && Url.IsLocalUrl(model.ReturnURL))
+                        return Redirect(model.ReturnURL);
                     return RedirectToAction("GetPlayerRankings", "Performances");
                 }
                 else
                 {
                     return View("Login");
-                } 
+                }
             }
         }
 
@@ -114,7 +116,7 @@ namespace BP.Controllers
                 {
                     return View();
                 }
-                else if (context.Users.Any(g=>g.Username == user.Username))
+                else if (context.Users.Any(g => g.Username == user.Username))
                 {
                     ModelState.AddModelError("", "Username already exists");
                     return View();
@@ -123,7 +125,7 @@ namespace BP.Controllers
                 {
                     await UserAuthentication.AddAsync(user, context);
                     return View("Login");
-                } 
+                }
             }
         }
 

@@ -35,6 +35,11 @@
                     <li><a asp-area="" asp-controller="Players" asp-action="Index">Players</a></li>
                     <li><a asp-area="" asp-controller="Teams" asp-action="Index">Teams</a></li>
                     <li><a asp-area="" asp-controller="Scorings" asp-action="Index">Scoring System</a></li>
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        <li><a asp-area="" asp-controller="Payments" asp-action="Index">Payments</a></li>
+
+                    }
 
                 </ul>
 
@@ -47,7 +52,8 @@
                         </li>
                     </ul>
                 }
-                </div>
+            </div>
+        </div>
     </nav>
     <div class="container body-content">
         @RenderBody()

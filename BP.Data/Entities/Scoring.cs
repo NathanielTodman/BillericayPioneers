@@ -15,7 +15,6 @@ namespace BP.Data
         public int MOTM { get; set; }
         public int YellowCard { get; set; }
         public int RedCard { get; set; }
-
     }
 
     public enum Position

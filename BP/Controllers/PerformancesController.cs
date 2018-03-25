@@ -114,7 +114,7 @@ namespace BP.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("ID,PlayerID,MatchID,Position,Appearance,Goals,CleanSheet,Assists,GoalsConceeded,PenaltiesSaved,PenaltiesMissed,MOTM,YellowCard,RedCard")] Performance performance)
+        public async Task<IActionResult> Edit(int id, [Bind("ID,PlayerID,MatchID,Position,Appearance,Goals,CleanSheet,Assists,GoalsConceeded,PenaltiesSaved,PenaltiesMissed,MOTM,YellowCard,RedCard,Paid,Substitute")] Performance performance)
         {
             if (id != performance.ID)
             {

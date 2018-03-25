@@ -16,10 +16,10 @@
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                 <label asp-for="PlayerID" class="control-label">Player</label>
-                <select asp-for="PlayerID" class ="form-control" asp-items="ViewBag.PlayerID"></select>
+                <select asp-for="PlayerID" class="form-control" asp-items="ViewBag.PlayerID"></select>
             </div>
             <div class="form-group">
-                <input asp-for="MatchID" type="hidden" value ="@Model.MatchID"/>
+                <input asp-for="MatchID" type="hidden" value="@Model.MatchID" />
             </div>
             <div class="form-group">
                 <label asp-for="Position" class="control-label"></label>
@@ -29,7 +29,7 @@
             <div class="form-group">
                 <div class="checkbox">
                     <label>
-                        <input asp-for="Appearance" checked="checked"/> @Html.DisplayNameFor(model => model.Appearance)
+                        <input asp-for="Appearance" checked="checked" /> @Html.DisplayNameFor(model => model.Appearance)
                     </label>
                 </div>
             </div>
@@ -38,7 +38,7 @@
                 <input asp-for="Goals" class="form-control" />
                 <span asp-validation-for="Goals" class="text-danger"></span>
             </div>
-           
+
             <div class="form-group">
                 <label asp-for="Assists" class="control-label"></label>
                 <input asp-for="Assists" class="form-control" />
@@ -72,6 +72,20 @@
                 <div class="checkbox">
                     <label>
                         <input asp-for="RedCard" /> @Html.DisplayNameFor(model => model.RedCard)
+                    </label>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="checkbox">
+                    <label>
+                        <input asp-for="Paid" /> @Html.DisplayNameFor(model => model.Paid)
+                    </label>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="checkbox">
+                    <label>
+                        <input asp-for="Substitute" /> @Html.DisplayNameFor(model => model.Substitute)
                     </label>
                 </div>
             </div>

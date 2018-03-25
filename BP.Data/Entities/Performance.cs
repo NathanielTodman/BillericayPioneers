@@ -19,5 +19,24 @@
         public bool YellowCard { get; set; }
         public bool RedCard { get; set; }
         public int TotalPoints { get; set; }
+        public bool Substitute { get; set; }
+        public bool Paid { get; set; }
+
+        public int AmountPaid
+        {
+            get
+            {
+                var amount = Substitute ? 3 : 5;
+                return Paid ? amount : 0;
+            }
+        }
+        public int AmountDue
+        {
+            get
+            {
+                var amount = Substitute ? 3 : 5;
+                return Paid ? 0 : amount;
+            }
+        }
     }
 }

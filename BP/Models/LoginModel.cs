@@ -17,6 +17,7 @@ namespace BP.Models
         [MinLength(8)]
         public string Password { get; set; }
 
+        public string ReturnURL { get; set; }
 
         public LoginModel()
         {

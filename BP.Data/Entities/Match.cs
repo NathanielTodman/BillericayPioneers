@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace BP.Data
 {
@@ -12,6 +13,7 @@ namespace BP.Data
         public int HomeScore { get; set; }
         public int AwayScore { get; set; }
         public Competition Competition { get; set; }
+        public virtual IEnumerable<Performance> Performances { get; set; }
 
         public string MatchName
         {
